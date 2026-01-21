@@ -17,6 +17,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.util.Vector;
 
+/**
+ * Listener for pet damage events to handle protection and void teleportation.
+ */
 public class PetDamageListener implements Listener {
 
   private static final double VOID_Y_LEVEL = -67;
@@ -24,11 +27,21 @@ public class PetDamageListener implements Listener {
   private final PetProtectPlugin plugin;
   private final ConfigManager config;
 
+  /**
+   * Constructs a new PetDamageListener.
+   *
+   * @param plugin the plugin instance
+   */
   public PetDamageListener(PetProtectPlugin plugin) {
     this.plugin = plugin;
     this.config = plugin.getConfigManager();
   }
 
+  /**
+   * Handles entity damage events to protect pets and teleport them from the void.
+   *
+   * @param event the damage event
+   */
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onEntityDamage(EntityDamageEvent event) {
     if (!config.isEnabled()) {

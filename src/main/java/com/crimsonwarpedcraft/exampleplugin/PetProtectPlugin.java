@@ -5,6 +5,9 @@ import com.crimsonwarpedcraft.exampleplugin.listener.PetDamageListener;
 import io.papermc.lib.PaperLib;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Main plugin class for PetProtect.
+ */
 public class PetProtectPlugin extends JavaPlugin {
 
   private static PetProtectPlugin instance;
