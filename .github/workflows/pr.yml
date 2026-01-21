@@ -33,7 +33,8 @@ jobs:
         uses: ./.github/actions/common-setup
         with:
           java-version: ${{ matrix.java }}
-
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build --info
 

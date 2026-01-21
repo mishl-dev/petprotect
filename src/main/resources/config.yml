@@ -17,3 +17,6 @@ protect-from-other-environmental: true
 # Owner damage settings
 allow-owner-damage: true
 allow-owner-projectiles: true
+
+# Void teleportation
+teleport-on-void: true

@@ -1,20 +1,18 @@
-main: ${PACKAGE}.${NAME}
-name: ${NAME}
+main: com.crimsonwarpedcraft.exampleplugin.PetProtectPlugin
+name: PetProtect
 version: "${VERSION}"
-api-version: "1.21.11"
-author: AUTHOR
-description: DESCRIPTION
+api-version: "1.21"
+author: mishl
+description: Protects tamed pets from damage except from their owner
 commands:
-  ex:
-    description: Base command for EXAMPLE
-    usage: "For a list of commands, type /ex help"
-    aliases: example
+  petprotect:
+    description: PetProtect main command
+    usage: "/petprotect help"
+    aliases: pp
 permissions:
-  example.test:
-    description: DESCRIPTION
-    default: true
-  example.*:
-    description: Grants all other permissions
-    default: false
-    children:
-      example.test: true
+  petprotect.admin:
+    description: Grants access to admin commands
+    default: op
+  petprotect.bypass:
+    description: Allows bypassing pet protection
+    default: op

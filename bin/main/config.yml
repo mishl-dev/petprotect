@@ -1,1 +1,19 @@
-# A journey of 1,000 lines starts with a single char
+enabled: true
+
+# Protection settings
+protect-from-entities: true
+protect-from-environment: true
+protect-from-projectiles: true
+protect-from-magic: true
+protect-from-fire: true
+protect-from-drowning: true
+protect-from-falling: true
+protect-from-suffocation: true
+protect-from-lightning: true
+protect-from-starvation: true
+protect-from-contact: true
+protect-from-other-environmental: true
+
+# Owner damage settings
+allow-owner-damage: true
+allow-owner-projectiles: true

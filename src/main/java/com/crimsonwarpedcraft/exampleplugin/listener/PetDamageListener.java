@@ -2,8 +2,11 @@ package com.crimsonwarpedcraft.exampleplugin.listener;
 
 import com.crimsonwarpedcraft.exampleplugin.PetProtectPlugin;
 import com.crimsonwarpedcraft.exampleplugin.config.ConfigManager;
+import io.papermc.lib.PaperLib;
+import org.bukkit.Location;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -15,6 +18,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.util.Vector;
 
 public class PetDamageListener implements Listener {
+
+  private static final double VOID_Y_LEVEL = -67;
 
   private final PetProtectPlugin plugin;
   private final ConfigManager config;
@@ -72,6 +77,22 @@ public class PetDamageListener implements Listener {
         return;
       }
 
+      if (event.getCause() == DamageCause.VOID) {
+        if (config.shouldTeleportOnVoid()) {
+          teleportPetToOwner(entity, owner);
+        }
+        event.setCancelled(true);
+        return;
+      }
+
+      if (entity.getLocation().getY() <= VOID_Y_LEVEL) {
+        if (config.shouldTeleportOnVoid()) {
+          teleportPetToOwner(entity, owner);
+        }
+        event.setCancelled(true);
+        return;
+      }
+
       event.setCancelled(true);
       extinguishFire(entity);
     }
@@ -87,7 +108,8 @@ public class PetDamageListener implements Listener {
   private void reflectProjectile(Projectile projectile, Entity pet, Entity shooter) {
     projectile.setShooter(null);
 
-    Vector direction = shooter.getLocation().toVector().subtract(pet.getLocation().toVector()).normalize();
+    Vector direction = shooter.getLocation().toVector()
+        .subtract(pet.getLocation().toVector()).normalize();
 
     double speed = projectile.getVelocity().length();
     if (speed < 0.5) {
@@ -144,6 +166,21 @@ public class PetDamageListener implements Listener {
   private void extinguishFire(Entity entity) {
     if (entity.getFireTicks() > 0) {
       entity.setFireTicks(0);
+    }
+  }
+
+  private void teleportPetToOwner(Entity pet, AnimalTamer owner) {
+    if (owner instanceof Player player) {
+      Location ownerLoc = player.getLocation();
+      Location teleportLoc = new Location(
+          ownerLoc.getWorld(),
+          ownerLoc.getX(),
+          ownerLoc.getY() + 1,
+          ownerLoc.getZ(),
+          ownerLoc.getYaw(),
+          ownerLoc.getPitch()
+      );
+      PaperLib.teleportAsync(pet, teleportLoc);
     }
   }
 }

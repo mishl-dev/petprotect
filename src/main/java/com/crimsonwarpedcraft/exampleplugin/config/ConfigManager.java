@@ -77,4 +77,8 @@ public class ConfigManager {
   public boolean shouldAllowOwnerProjectiles() {
     return config.getBoolean("allow-owner-projectiles", true);
   }
+
+  public boolean shouldTeleportOnVoid() {
+    return config.getBoolean("teleport-on-void", true);
+  }
 }
