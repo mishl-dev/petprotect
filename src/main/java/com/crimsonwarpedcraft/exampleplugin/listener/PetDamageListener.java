@@ -2,7 +2,9 @@ package com.crimsonwarpedcraft.exampleplugin.listener;
 
 import com.crimsonwarpedcraft.exampleplugin.PetProtectPlugin;
 import com.crimsonwarpedcraft.exampleplugin.config.ConfigManager;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.papermc.lib.PaperLib;
+import java.util.Objects;
 import org.bukkit.Location;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Entity;
@@ -24,6 +26,7 @@ public class PetDamageListener implements Listener {
 
   private static final double VOID_Y_LEVEL = -67;
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2")
   private final PetProtectPlugin plugin;
   private final ConfigManager config;
 
@@ -32,8 +35,9 @@ public class PetDamageListener implements Listener {
    *
    * @param plugin the plugin instance
    */
+  @SuppressWarnings("EI_EXPOSE_REP")
   public PetDamageListener(PetProtectPlugin plugin) {
-    this.plugin = plugin;
+    this.plugin = Objects.requireNonNull(plugin);
     this.config = plugin.getConfigManager();
   }
 

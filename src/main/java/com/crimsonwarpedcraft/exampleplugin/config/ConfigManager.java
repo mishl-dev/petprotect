@@ -1,6 +1,8 @@
 package com.crimsonwarpedcraft.exampleplugin.config;
 
 import com.crimsonwarpedcraft.exampleplugin.PetProtectPlugin;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.Objects;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
@@ -8,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
  */
 public class ConfigManager {
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2")
   private final PetProtectPlugin plugin;
   private FileConfiguration config;
 
@@ -16,8 +19,9 @@ public class ConfigManager {
    *
    * @param plugin the plugin instance
    */
+  @SuppressWarnings("EI_EXPOSE_REP")
   public ConfigManager(PetProtectPlugin plugin) {
-    this.plugin = plugin;
+    this.plugin = Objects.requireNonNull(plugin);
     this.config = plugin.getConfig();
   }
 
