@@ -1,0 +1,18 @@
+main: com.crimsonwarpedcraft.exampleplugin.PetProtectPlugin
+name: PetProtect
+version: "${VERSION}"
+api-version: "1.21"
+author: mishl
+description: Protects tamed pets from damage except from their owner
+commands:
+  petprotect:
+    description: PetProtect main command
+    usage: "/petprotect help"
+    aliases: pp
+permissions:
+  petprotect.admin:
+    description: Grants access to admin commands
+    default: op
+  petprotect.bypass:
+    description: Allows bypassing pet protection
+    default: op
